@@ -72,7 +72,29 @@ const data = [
       adipiscing elit. Nidorina Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidoqueen Lorem ipsum dolor sit amet,
       consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
       sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`
-    }
+    },
+    {
+    title: 'Tan anaa ku daray waxan egaya inay qaadato',
+    date: 'Jan 1st, 2019',
+    content: `Bulbasaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ivysaur Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Venusaur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charmander Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Charmeleon Lorem ipsum dolor sit amet, consectetur adipiscing elit. Charizard Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Squirtle Lorem ipsum dolor sit amet, consectetur adipiscing elit. Wartortle Lorem ipsum dolor
+    sit amet, consectetur adipiscing elit. Blastoise Lorem ipsum dolor sit amet, consectetur adipiscing elit. Caterpie Lorem
+    ipsum dolor sit amet, consectetur adipiscing elit. Metapod Lorem ipsum dolor sit amet, consectetur adipiscing elit. Butterfree
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Weedle Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Kakuna Lorem ipsum dolor sit amet, consectetur adipiscing elit. Beedrill Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Pidgey Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pidgeotto Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Pidgeot Lorem ipsum dolor sit amet, consectetur adipiscing elit. Rattata Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Raticate Lorem ipsum dolor sit amet, consectetur adipiscing elit. Spearow Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Fearow Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ekans Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Arbok Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pikachu Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Raichu Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sandshrew Lorem ipsum dolor sit amet, consectetur adipiscing
+    elit. Sandslash Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur
+    adipiscing elit. Nidorina Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidoqueen Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Nidoran Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nidorino Lorem ipsum dolor
+    sit amet, consectetur adipiscing elit. Nidoking Lorem ipsum`
+  }
   ];
   
   /*
@@ -100,5 +122,51 @@ const data = [
     Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
     Refresh the page to see the new article.
   */
-  
+    const open = "\u25bc"
+    const close = "\u25b2"
 
+    function articleMaker(article) {
+      // create the article element
+      const articleEl = document.createElement('div');
+      articleEl.classList.add('article');
+      
+      // create the title element
+      const titleEl = document.createElement('h2');
+      titleEl.textContent = article.title;
+      
+      // create the date element
+      const dateEl = document.createElement('p');
+      dateEl.classList.add('date');
+      dateEl.textContent = article.date;
+      
+      // create the content element
+      const contentEl = document.createElement('div');
+      contentEl.innerHTML = article.content;
+      
+      // create the expand button element
+      const expandButtonEl = document.createElement('span');
+      expandButtonEl.classList.add('expandButton');
+      expandButtonEl.textContent = open;
+      
+      // add event listener to the expand button
+      expandButtonEl.addEventListener('click', () => {
+        articleEl.classList.toggle('article-open');
+        expandButtonEl.textContent = articleEl.classList.contains('article-open') ? close : open;
+      });
+      
+      // append the elements to the article element
+      articleEl.appendChild(titleEl);
+      articleEl.appendChild(dateEl);
+      articleEl.appendChild(contentEl);
+      articleEl.appendChild(expandButtonEl);
+      
+      // return the article element
+      return articleEl;
+    }
+    
+    const articlesEl = document.querySelector('.articles');
+
+data.forEach(article => {
+  const articleEl = articleMaker(article);
+  articlesEl.appendChild(articleEl);
+});
